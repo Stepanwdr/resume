@@ -35,7 +35,7 @@ export default function App() {
 
 const Container = styled.div`
   display: flex;
-  height: calc(100vh - 40px);
+  height: calc(100vh);
   padding: 20px;
   gap: 20px;
 `;
