@@ -38,7 +38,7 @@ export const ResumePreview = ({ sections }: { sections: Section[] }) => {
             )}
             {s.type === "Образование" && (
               <>
-                {s.institution}, {s.specialty} ({s.period})
+                {s.institution} {s.institution && ','} {s.specialty} {s.period && (s.period)}
               </>
             )}
             {s.type === "Навыки" && <>{s.skills.join(", ")}</>}
