@@ -32,7 +32,7 @@ export const ResumePreview = ({ sections }: { sections: Section[] }) => {
             <Title>{s.type}</Title>
             {s.type === "Опыт" && (
               <>
-                <strong>{s.position}</strong> в {s.company} ({s.period})
+                <strong>{s.position}</strong> {s.period && 'в'} {s.company} {s.period && (s.period)}
                 <p>{s.description}</p>
               </>
             )}

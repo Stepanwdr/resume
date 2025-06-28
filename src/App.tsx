@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { ResumeEditor } from "./components/ResumeEditor";
 import { ResumePreview } from "./components/ResumePreview";
-import { Section } from "./types";
+import type { Section } from "./types";
 import { GlobalStyles } from "./styles/GlobalStyles";
 import styled from "styled-components";
 
@@ -35,7 +35,7 @@ export default function App() {
 
 const Container = styled.div`
   display: flex;
-  height: calc(100vh);
+  height: 100vh;
   padding: 20px;
   gap: 20px;
 `;
