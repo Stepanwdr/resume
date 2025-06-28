@@ -5,11 +5,18 @@ import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import styled from "styled-components";
 
 interface Props {
+  fullName: string;
+  setFullName: (name: string) => void;
   sections: Section[];
   setSections: (s: Section[]) => void;
 }
 
-export const ResumeEditor = ({ sections, setSections }: Props) => {
+export const ResumeEditor = ({
+  fullName,
+  setFullName,
+  sections,
+  setSections,
+}: Props) => {
   const onDragEnd = (result: any) => {
     if (!result.destination) return;
     const reordered = Array.from(sections);
@@ -28,6 +35,14 @@ export const ResumeEditor = ({ sections, setSections }: Props) => {
 
   return (
     <EditorContainer>
+      <Label>Имя и фамилия:</Label>
+      <Input
+        type="text"
+        value={fullName}
+        onChange={(e) => setFullName(e.target.value)}
+        placeholder="Введите имя и фамилию"
+      />
+
       <AddSection setSections={setSections} sections={sections} />
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="sections">
@@ -60,14 +75,28 @@ export const ResumeEditor = ({ sections, setSections }: Props) => {
 };
 
 const EditorContainer = styled.div`
-  margin-top: 16px;
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+`;
+
+const Label = styled.label`
+    font-weight: 500;
+    margin-bottom: 4px;
+`;
+
+const Input = styled.input`
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
 `;
 
 const SectionList = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
-  margin-top: 16px;
 `;
 
 const SectionItem = styled.div`

@@ -8,6 +8,7 @@ import styled from "styled-components";
 
 export default function App() {
   const [sections, setSections] = useState<Section[]>([]);
+  const [fullName, setFullName] = useState("");
 
   useEffect(() => {
     const saved = localStorage.getItem("resume");
@@ -23,10 +24,15 @@ export default function App() {
       <GlobalStyles />
       <Container>
         <Panel>
-          <ResumeEditor sections={sections} setSections={setSections} />
+          <ResumeEditor
+            fullName={fullName}
+            setFullName={setFullName}
+            sections={sections}
+            setSections={setSections}
+          />
         </Panel>
         <Panel>
-          <ResumePreview sections={sections} />
+          <ResumePreview fullName={fullName} sections={sections} />
         </Panel>
       </Container>
     </>

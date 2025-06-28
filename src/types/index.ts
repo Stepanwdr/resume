@@ -3,6 +3,8 @@ export type SectionType = "Опыт" | "Образование" | "Навыки"
 export interface BaseSection {
   id: string;
   type: SectionType;
+  name?: string;
+  surname?: string;
 }
 
 export interface ExperienceSection extends BaseSection {

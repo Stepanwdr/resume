@@ -4,7 +4,12 @@ import { useRef } from "react";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 
-export const ResumePreview = ({ sections }: { sections: Section[] }) => {
+interface Props {
+  fullName: string;
+  sections: Section[];
+}
+
+export const ResumePreview = ({ sections, fullName }: Props) => {
   const previewRef = useRef<HTMLDivElement>(null);
 
   const downloadPDF = async () => {
@@ -26,7 +31,8 @@ export const ResumePreview = ({ sections }: { sections: Section[] }) => {
       <DownloadButton onClick={downloadPDF}>Скачать как PDF</DownloadButton>
 
       <PreviewWrapper ref={previewRef}>
-        <h1 style={{ fontSize: "24px", marginBottom: "20px" }}>Резюме</h1>
+        <FullName>{fullName}</FullName>
+        <MainTitle>Резюме</MainTitle>
         {sections.map((s) => (
           <SectionBlock key={s.id}>
             <Title>{s.type}</Title>
@@ -41,8 +47,8 @@ export const ResumePreview = ({ sections }: { sections: Section[] }) => {
                 {s.institution} {s.institution && ','} {s.specialty} {s.period && (s.period)}
               </>
             )}
-            {s.type === "Навыки" && <>{s.skills.join(", ")}</>}
-            {s.type === "Сертификаты" && <>{s.certificates.join(", ")}</>}
+            {s.type === "Навыки" && <>{s.skills?.join(", ")}</>}
+            {s.type === "Сертификаты" && <>{s.certificates?.join(", ")}</>}
             {s.type === "О себе" && <p>{s.description}</p>}
           </SectionBlock>
         ))}
@@ -69,11 +75,23 @@ const Title = styled.h2`
     font-size: 18px;
 `;
 
+const FullName = styled.h1`
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px;
+`;
+
+const MainTitle = styled.h2`
+  font-size: 22px;
+  margin-bottom: 20px;
+  color: #444;
+`;
+
 const DownloadButton = styled.button`
-    padding: 8px 16px;
-    background: #3b82f6;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+  padding: 8px 16px;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 `;
